@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  leads     Lead[]
+}
+
+model Lead {
+  id               String    @id @default(uuid())
+  clientName       String
+  platform         String    @default("Upwork")
+  platformId       String?   // E.g. Upwork room ID or internal reference
+  lastContactDate  DateTime  @default(now())
+  nextPingDate     DateTime? // Calculated based on 3-day / 10-day logic
+  totalPingsSent   Int       @default(0) // 0, 1, or 2
+  status           String    @default("ACTIVE") // ACTIVE, RESPONDED, CLOSED
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  
+  userId           String
+  user             User      @relation(fields: [userId], references: [id])
+  
+  logs             PingLog[]
+}
+
+model PingLog {
+  id        String   @id @default(uuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id])
+  pingType  String   // "FIRST_PING" (3 days), "SECOND_PING" (10 days), "MANUAL"
+  sentAt    DateTime @default(now())
+}

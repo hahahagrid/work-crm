@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Upwork CRM Synchronizer",
+  "version": "1.0.0",
+  "description": "Monitors Upwork messages and syncs state with the internal CRM",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.upwork.com/nx/wm/*", "*://*.upwork.com/messages/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

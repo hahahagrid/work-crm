@@ -1,0 +1,29 @@
+{
+  "name": "crm-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.16",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@prisma/client": "^7.7.0",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "14.2.16",
+    "postcss": "latest",
+    "prisma": "^7.7.0",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  }
+}
